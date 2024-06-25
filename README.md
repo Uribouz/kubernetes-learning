@@ -227,7 +227,9 @@
 - VMware Tanzu Octant
 - Helm
 ##### Helm 
-Helm is a package manager for Kubernetes, which allows easier updates and interaction with objects. Helm packages Kubernetes objects in so-called Charts, which can be shared with others via a registry. To get started with Kubernetes, you can search the ArtifactHub to find your favorite software packages, ready to deploy
+- Helm is a package manager for Kubernetes, which allows easier updates and interaction with objects. Helm packages Kubernetes objects in so-called Charts, which can be shared with others via a registry. To get started with Kubernetes, you can search the ArtifactHub to find your favorite software packages, ready to deploy
+- Very useful when you want to use 'already-kustomize-template' from the already existing projects like 'nginx', Setup cluster of Nginx using 'Helm' [Link] (https://helm.nginx.com/)
+- Useful site to explore existing 'Helm' packages [Link] (https://artifacthub.io/)
 ##### Beware Kubernetes user permission
 - เก็บ Context ของ user ของคุณไว้ให้ดี
 - อย่าให้สิทธิ user มากเกินความจำเป็น เช่นเป็น 'admin'
@@ -250,3 +252,6 @@ Helm is a package manager for Kubernetes, which allows easier updates and intera
 - Disposability: Fast startup and Graceful shutdown https://12factor.net/disposability
 - Kubernetes private registry: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account
 - Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
+- Kustomize help: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
+- SOPS: Secrets OPerationS: https://github.com/getsops/sops
+- 'daily-dev' site to read news about developer: https://daily.dev/
