@@ -191,7 +191,7 @@
     + It is like .env file which can vary on environments (dev, uat, and production)
     + Does not support large chunks of data.
     + The size of configmap cannot exceed 1MB.
-
+- Secret ของ Kubernetes การใช้งาน เหมือนกับ ConfigMaps แต่จะช่วย encode base64 ของ environment value ที่เราเก็บไว้ (ซึ่งไม่ได้ปลอดภัยขนาดนั้น ถ้าข้อมูล Sensitive จริงๆ ควรใช้ Thirdparty library แทน)
 
 #### Tips
 ##### Equivalent: Docker vs Kubernetes
@@ -248,3 +248,5 @@ Helm is a package manager for Kubernetes, which allows easier updates and intera
 - Stress Learning: https://www.nature.com/articles/npjscilearn201611
 - Kubectl Reference: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run
 - Disposability: Fast startup and Graceful shutdown https://12factor.net/disposability
+- Kubernetes private registry: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account
+- Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
