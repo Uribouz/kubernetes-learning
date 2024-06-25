@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configMapGenerator:
+- name: payment
+  files:
+  - application.properties
+generatorOptions:
+  disableNameSuffixHash: true
+
+commonLabels:
+  app: nong-kai
+  env: prod
+
+# Deployment
+replicas:
+- name: my-nginx
+  count: 5
+
+resources:
+- deploy.yaml
