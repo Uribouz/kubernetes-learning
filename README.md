@@ -226,6 +226,12 @@ spec:
         cpu: "500m"
 ```
 
+### Taints and Tolerations
+Taints = แม่กุญแจ = การออกกฏหมายว่าตอนนี้ห้าม POD ประเภทไหนเข้ามา
+Tolerations = ลูกกุญแจ = อลุ่มอะหล่วยว่า POD นี้สามารถเข้ามาทำงานได้
+
+[Link](https://medium.com/kubernetes-tutorials/making-sense-of-taints-and-tolerations-in-kubernetes-446e75010f4e)
+
 ### Learning
 - ReplicaSet ของ Kubernetes หมายถึง set ของ PODs ที่เมื่อ POD ตัวใดตัวหนึ่งตาย ระบบจะพยายาม restart pod ขึ้นมาให้ start ได้ทั้งหมด
 - Service ของ Kubernetest มีการทำงานในการเลือก task ให้ POD โดยการดูว่า POD ไหนใช้ resource ที่น้อยที่สุดจะให้ POD ตัวนั้นได้รับไป, แต่ถ้าเท่ากันจะ random (ซึ่งสามารถปรับฯแก้ tune logic นี้ได้)
@@ -316,3 +322,5 @@ process.on('SIGTERM', () => {
 - SOPS: Secrets OPerationS: https://github.com/getsops/sops
 - 'daily-dev' site to read news about developer: https://daily.dev/
 - การจัดการ Resource Quotas: https://frankdenneman.nl/2020/03/20/scheduling-vsphere-pods/
+- Let's Encrypt จัดการ certificate ของ DomainName website ของคุณ: https://letsencrypt.org/
+- Kubernetes CheatSheet: https://web.facebook.com/acloudguru/posts/the-ultimate-kubernetes-cheat-sheet-save-and-share-plus-register-for-the-free-ku/3547894078603673/?_rdc=1&_rdr
