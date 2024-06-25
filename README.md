@@ -181,6 +181,28 @@
     ```
 ---
 
+
+### Probe
+#### StartupProbe + LivenessProbe
+Following yaml 
+1) will wait for 30*5 = 300 sec = 5min wait for app to startup 'startupProbe'
+2) After 5 min of wait it will probeCheck the application liveness 'livenessProbe'
+
+```yaml
+startupProbe:
+ httpGet:
+ path: /healthz
+ port: liveness-port
+ failureThreshold: 30
+ periodSeconds: 10
+livenessProbe:
+httpGet:
+ path: /healthz
+ port: liveness-port
+failureThreshold: 1
+periodSeconds: 10
+```
+
 ### Learning
 - ReplicaSet ของ Kubernetes หมายถึง set ของ PODs ที่เมื่อ POD ตัวใดตัวหนึ่งตาย ระบบจะพยายาม restart pod ขึ้นมาให้ start ได้ทั้งหมด
 - Service ของ Kubernetest มีการทำงานในการเลือก task ให้ POD โดยการดูว่า POD ไหนใช้ resource ที่น้อยที่สุดจะให้ POD ตัวนั้นได้รับไป, แต่ถ้าเท่ากันจะ random (ซึ่งสามารถปรับฯแก้ tune logic นี้ได้)
@@ -193,7 +215,23 @@
     + The size of configmap cannot exceed 1MB.
 - Secret ของ Kubernetes การใช้งาน เหมือนกับ ConfigMaps แต่จะช่วย encode base64 ของ environment value ที่เราเก็บไว้ (ซึ่งไม่ได้ปลอดภัยขนาดนั้น ถ้าข้อมูล Sensitive จริงๆ ควรใช้ Thirdparty library แทน)
 
+
 #### Tips
+##### Graceful shutdown
+- When you deploy a new version of your application, you must replace the previous version. The process manager you’re using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used, including database connections and file locks then exit.
+
+```javascript
+Example
+const server = app.listen(port)
+
+process.on('SIGTERM', () => {
+  debug('SIGTERM signal received: closing HTTP server')
+  server.close(() => {
+    debug('HTTP server closed')
+  })
+})
+```
+
 ##### Equivalent: Docker vs Kubernetes
     ```bash
     docker run --name nginx -d nginx
@@ -235,13 +273,13 @@
 - อย่าให้สิทธิ user มากเกินความจำเป็น เช่นเป็น 'admin'
 
 
-#### Note:
+##### Note:
 - Container run time interface = ช่องทางในการรัน container
 - Ingress ของ Kubernetes ในอนาคตอาจจะถูกแทนที่ด้วย API Gateway เช่น Nginx Gateway, etc...
 - K8s คือชื่อเล่นของ Kubernetes
 - Build one, Run anywhere คือหัวใจของ Docker
 
-#### Link:
+##### Link:
 - Sidecar deployment strategy: https://istio.io/latest/docs/ops/deployment/architecture/
 - eBPF deployment strategy: https://www.armosec.io/glossary/ebpf-kubernetes/
 - What is Kubernetes: https://www.blognone.com/node/106492
