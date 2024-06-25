@@ -185,6 +185,13 @@
 - ReplicaSet ของ Kubernetes หมายถึง set ของ PODs ที่เมื่อ POD ตัวใดตัวหนึ่งตาย ระบบจะพยายาม restart pod ขึ้นมาให้ start ได้ทั้งหมด
 - Service ของ Kubernetest มีการทำงานในการเลือก task ให้ POD โดยการดูว่า POD ไหนใช้ resource ที่น้อยที่สุดจะให้ POD ตัวนั้นได้รับไป, แต่ถ้าเท่ากันจะ random (ซึ่งสามารถปรับฯแก้ tune logic นี้ได้)
 - POD = the smallest deployable units of Kubernetes
+- ConfigMaps ของ Kubernetes จะช่วยให้เราจัดการ Configuration ของ POD ทุกตัว ได้ดีกว่า การใช้งาน Environment variable ตรงๆ (จะเป็น POD อีกตัวที่มี type เป็น ConfigMaps)
+    + Allow you to decouple configuration from image content to keep containerized applications portable
+    + It is used to setting configuration data separately from application code
+    + It is like .env file which can vary on environments (dev, uat, and production)
+    + Does not support large chunks of data.
+    + The size of configmap cannot exceed 1MB.
+
 
 #### Tips
 ##### Equivalent: Docker vs Kubernetes
@@ -230,6 +237,7 @@ Helm is a package manager for Kubernetes, which allows easier updates and intera
 - Container run time interface = ช่องทางในการรัน container
 - Ingress ของ Kubernetes ในอนาคตอาจจะถูกแทนที่ด้วย API Gateway เช่น Nginx Gateway, etc...
 - K8s คือชื่อเล่นของ Kubernetes
+- Build one, Run anywhere คือหัวใจของ Docker
 
 #### Link:
 - Sidecar deployment strategy: https://istio.io/latest/docs/ops/deployment/architecture/
@@ -239,3 +247,4 @@ Helm is a package manager for Kubernetes, which allows easier updates and intera
 - Kubernetes Replication Controller, Replica Set and Deployments: https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options#whatis
 - Stress Learning: https://www.nature.com/articles/npjscilearn201611
 - Kubectl Reference: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run
+- Disposability: Fast startup and Graceful shutdown https://12factor.net/disposability
