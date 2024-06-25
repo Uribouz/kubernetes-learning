@@ -238,3 +238,4 @@ Helm is a package manager for Kubernetes, which allows easier updates and intera
 - Helm: https://helm.sh/
 - Kubernetes Replication Controller, Replica Set and Deployments: https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options#whatis
 - Stress Learning: https://www.nature.com/articles/npjscilearn201611
+- Kubectl Reference: https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run
