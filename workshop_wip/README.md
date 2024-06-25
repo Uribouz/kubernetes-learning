@@ -7,3 +7,5 @@
 ### KillerCoda Kubernetes Rolling-Update workshop:
 - https://killercoda.com/jumpbox/course/kubernetes-in-action/kubernetes-rolling-updates
 
+### KillerCoda Kubernetes Secrets workshop:
+https://killercoda.com/jumpbox/course/kubernetes-in-action/kubernetes-secrets

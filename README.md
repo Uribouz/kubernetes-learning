@@ -203,6 +203,29 @@ failureThreshold: 1
 periodSeconds: 10
 ```
 
+### Resource Quota: Limit usage of resource in each POD
+Link: https://blog.kubecost.com/blog/requests-and-limits/
+- request หมายถึงว่า ขอให้ POD นี้มีค่า memory และ CPU อย่างน้อยเท่านี้
+- limits หมายถึงว่า ถ้า POD นี้ใช้ memeory หรือ CPU เกิน ค่าที่กำหนด POD นั้นจะถูก restart ทันที
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app
+spec:
+  containers:
+  - name: wp
+    image: wordpress
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+```
+
 ### Learning
 - ReplicaSet ของ Kubernetes หมายถึง set ของ PODs ที่เมื่อ POD ตัวใดตัวหนึ่งตาย ระบบจะพยายาม restart pod ขึ้นมาให้ start ได้ทั้งหมด
 - Service ของ Kubernetest มีการทำงานในการเลือก task ให้ POD โดยการดูว่า POD ไหนใช้ resource ที่น้อยที่สุดจะให้ POD ตัวนั้นได้รับไป, แต่ถ้าเท่ากันจะ random (ซึ่งสามารถปรับฯแก้ tune logic นี้ได้)
@@ -216,7 +239,11 @@ periodSeconds: 10
 - Secret ของ Kubernetes การใช้งาน เหมือนกับ ConfigMaps แต่จะช่วย encode base64 ของ environment value ที่เราเก็บไว้ (ซึ่งไม่ได้ปลอดภัยขนาดนั้น ถ้าข้อมูล Sensitive จริงๆ ควรใช้ Thirdparty library แทน)
 
 
-#### Tips
+#### Tips & Notes
+- Container run time interface = ช่องทางในการรัน container
+- Ingress ของ Kubernetes ในอนาคตอาจจะถูกแทนที่ด้วย API Gateway เช่น Nginx Gateway, etc...
+- K8s คือชื่อเล่นของ Kubernetes
+- Build one, Run anywhere คือหัวใจของ Docker
 ##### Graceful shutdown
 - When you deploy a new version of your application, you must replace the previous version. The process manager you’re using will first send a SIGTERM signal to the application to notify it that it will be killed. Once the application gets this signal, it should stop accepting new requests, finish all the ongoing requests, clean up the resources it used, including database connections and file locks then exit.
 
@@ -272,13 +299,6 @@ process.on('SIGTERM', () => {
 - เก็บ Context ของ user ของคุณไว้ให้ดี
 - อย่าให้สิทธิ user มากเกินความจำเป็น เช่นเป็น 'admin'
 
-
-##### Note:
-- Container run time interface = ช่องทางในการรัน container
-- Ingress ของ Kubernetes ในอนาคตอาจจะถูกแทนที่ด้วย API Gateway เช่น Nginx Gateway, etc...
-- K8s คือชื่อเล่นของ Kubernetes
-- Build one, Run anywhere คือหัวใจของ Docker
-
 ##### Link:
 - Sidecar deployment strategy: https://istio.io/latest/docs/ops/deployment/architecture/
 - eBPF deployment strategy: https://www.armosec.io/glossary/ebpf-kubernetes/
@@ -290,6 +310,9 @@ process.on('SIGTERM', () => {
 - Disposability: Fast startup and Graceful shutdown https://12factor.net/disposability
 - Kubernetes private registry: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account
 - Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
+- Kubernetes Role management: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+- UI for Kubernetes role mangagement: https://k9scli.io/
 - Kustomize help: https://kubectl.docs.kubernetes.io/references/kustomize/kustomization/
 - SOPS: Secrets OPerationS: https://github.com/getsops/sops
 - 'daily-dev' site to read news about developer: https://daily.dev/
+- การจัดการ Resource Quotas: https://frankdenneman.nl/2020/03/20/scheduling-vsphere-pods/
