@@ -1,4 +1,4 @@
-### KillerCoda Kubernetes Deployment ConfigMap workshop:
+### KillerCoda Kubernetes ConfigMap workshop:
 https://killercoda.com/jumpbox/course/kubernetes-in-action/kubernetes-configmaps
 
 
